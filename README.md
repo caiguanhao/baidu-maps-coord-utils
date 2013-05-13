@@ -1,5 +1,16 @@
 # Baidu Maps Coordinates Utils
 
+## One-line command
+
+    $ bash addr2geo.sh 广州塔 | xargs bash geo2point.sh | xargs bash point2coord.sh
+      113.332243, 23.111631
+
+## Address to GEO string
+
+Returns the GEO string of the first search result for specified Chinese address in Baidu Maps. If no search results returned, try to remove last character and search again until GEO string is found.
+
+    bash addr2geo.sh 天安门
+
 ## GEO string to point conversion
 
 The argument supports GEO string with only one point. For those strings with multiple points, you may either use Baidu's [JavaScript functions](http://api.map.baidu.com/getmodules?v=1.2&mod=scommon) to convert them or split the string by ';' and treat each part as an argument to this script.
@@ -24,6 +35,11 @@ Points in multi-point GEO string share the same GEO type, which is determined by
 * The script file opened in new tab contains:
   * Functions to convert GEO string to point:
     * You can open the Console and type ``Q(".=LmIPNBjMOxcA;=LmIPNBjMOxcA;")``
+
+## Requirements
+
+* cURL
+* bc
 
 ## Developer
 
