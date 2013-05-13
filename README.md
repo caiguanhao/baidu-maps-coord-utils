@@ -12,6 +12,19 @@ Points in multi-point GEO string share the same GEO type, which is determined by
 
     bash point2coord.sh 12958130.03, 4826652.51
 
+## View / Use Baidu's JavaScript
+
+* Open [http://api.map.baidu.com/lbsapi/getpoint/](http://api.map.baidu.com/lbsapi/getpoint/) in Google Chrome.
+* Open Developer Tools panel and select Sources tab.
+* Select getscript JS file and open Pretty Print mode.
+* Find ``convertMC2LL: function`` and add a breakpoint inside the function by clicking the line number.
+  * This is the function to convert point to coordinates.
+* Search something in the web page to trigger the script.
+* When it reaches to the breakpoint, click O.parseGeo in Call Stack on the right sidebar.
+* The script file opened in new tab contains:
+  * Functions to convert GEO string to point:
+    * You can open the Console and type ``Q(".=LmIPNBjMOxcA;=LmIPNBjMOxcA;")``
+
 ## Developer
 
 * caiguanhao
