@@ -1,5 +1,7 @@
 # Baidu Maps Coordinates Utils
 
+Use these utils to automatically fetch coordinates of large quantities of addresses in China. These coordinates may be used as the default coordinates of the embeded Baidu Maps in web pages. Note that the way how Baidu Maps represent its coordinates is different from the rest of the world.
+
 ## One-line command
 
     $ bash addr2geo.sh 广州塔 | xargs bash geo2point.sh | xargs bash point2coord.sh
@@ -44,3 +46,11 @@ Points in multi-point GEO string share the same GEO type, which is determined by
 ## Developer
 
 * caiguanhao
+
+## 原理
+
+利用 cURL 访问百度地图公开的 API ，搜索地址，从结果中获取GEO字符串，如果没有结果，会删除最后一个字符，继续搜索，直至有结果为止。百度把地图上点的坐标“加密”成为GEO字符串，点的坐标又要经过运算才可得到经纬坐标。百度表示坐标的方法和正常的表示方法相反。
+
+我在百度上找不到可以直接转换或者获取坐标的方法。
+
+利用这个脚本可以快速获取大批地址对应的坐标，这些坐标可以作为各网站上嵌入的百度地图的默认坐标。
