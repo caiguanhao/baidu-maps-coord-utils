@@ -7,7 +7,8 @@ BC=$(which bc)
 if [[ ${#1} -eq 15 ]]; then
     GEO=$1
 else
-    echo "Please provide one GEO string (15 characters long, for example: \".=LmIPNBjMOxcA;\")."
+    echo "Please provide one GEO string (15 characters long, for example:"\
+         "\".=LmIPNBjMOxcA;\")."
     exit 1
 fi
 
