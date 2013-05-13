@@ -43,6 +43,10 @@ Points in multi-point GEO string share the same GEO type, which is determined by
 * cURL
 * bc
 
+## Examples
+
+* [Bash script to auto convert more than 50 addresses to coordinates](https://github.com/qnn/qnn-agent-sites/blob/master/misc/update_coords.sh)
+
 ## Developer
 
 * caiguanhao
