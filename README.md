@@ -4,14 +4,22 @@ Use these utils to automatically fetch coordinates of large quantities of addres
 
 ## One-line command
 
+**Address to coordinates**
+
     $ bash addr2geo.sh 广州塔 | xargs bash geo2point.sh | xargs bash point2coord.sh
-      113.332243, 23.111631
+      113.331110, 23.112097
+
+**Coordinates to address**
+
+    $ bash coord2point.sh 113.331110, 23.112097 | xargs bash point2addr.sh
+      广东省广州市海珠区艺苑路
 
 ## Address to GEO string
 
 Returns the GEO string of the first search result for specified Chinese address in Baidu Maps. If no search results returned, try to remove last character and search again until GEO string is found.
 
-    bash addr2geo.sh 天安门
+    $ bash addr2geo.sh 广州塔
+      .=UOqMLBsMwqPA;
 
 ## GEO string to point
 
@@ -19,21 +27,25 @@ The argument supports GEO string with only one point. For those strings with mul
 
 Points in multi-point GEO string share the same GEO type, which is determined by the first character of the string. A possible multi-point GEO string may look like this: ``.=LmIPNBjMOxcA;=LmIPNBjMOxcA;`` .
 
-    bash geo2point.sh ".=LmIPNBjMOxcA;"
+    $ bash geo2point.sh ".=UOqMLBsMwqPA;"
+      12616098.76, 2628657.08
 
 ## Point to coordinates
 
-    bash point2coord.sh 12958130.03, 4826652.51
+    $ bash point2coord.sh 12616098.76, 2628657.08
+      113.331110, 23.112097
 
 ### Coordinates to point
 
-    bash coord2point.sh 116.403596, 39.920041
+    $ bash coord2point.sh 113.331110, 23.112097
+      12616098.73, 2628657.09
 
 ## Point to address
 
 Find the possible address to the point.
 
-    bash point2addr.sh 12958130.03, 4826652.51
+    $ bash point2addr.sh 12616098.76, 2628657.08
+      广东省广州市海珠区艺苑路
 
 ## View / Use Baidu's JavaScript
 
@@ -47,6 +59,11 @@ Find the possible address to the point.
 * The script file opened in new tab contains:
   * Functions to convert GEO string to point:
     * You can open the Console and type ``Q(".=LmIPNBjMOxcA;=LmIPNBjMOxcA;")``
+
+## Bugs
+
+* Back-and-forth conversion between point and coordinates is not always accurate.
+* Baidu Maps may change the coordinates to the address frequently.
 
 ## Requirements
 
