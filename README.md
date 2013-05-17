@@ -13,7 +13,7 @@ Returns the GEO string of the first search result for specified Chinese address 
 
     bash addr2geo.sh 天安门
 
-## GEO string to point conversion
+## GEO string to point
 
 The argument supports GEO string with only one point. For those strings with multiple points, you may either use Baidu's [JavaScript functions](http://api.map.baidu.com/getmodules?v=1.2&mod=scommon) to convert them or split the string by ';' and treat each part as an argument to this script.
 
@@ -21,13 +21,19 @@ Points in multi-point GEO string share the same GEO type, which is determined by
 
     bash geo2point.sh ".=LmIPNBjMOxcA;"
 
-## Point to coordinates conversion
+## Point to coordinates
 
     bash point2coord.sh 12958130.03, 4826652.51
 
-### Coordinates to point conversion
+### Coordinates to point
 
     bash coord2point.sh 116.403596, 39.920041
+
+## Point to address
+
+Find the possible address to the point.
+
+    bash point2addr.sh 12958130.03, 4826652.51
 
 ## View / Use Baidu's JavaScript
 
