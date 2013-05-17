@@ -4,9 +4,6 @@ set -e
 
 BC=$(which bc)
 
-POINT_X=12958130.03
-POINT_Y=4826652.51
-
 ARG_1=${1//,/}
 ARG_2=$2
 
@@ -16,7 +13,8 @@ then
     POINT_X=$ARG_1
     POINT_Y=$ARG_2
 else
-    echo "No point specified. Default point (${POINT_X}, ${POINT_Y}) is used."
+    echo "No point specified."
+    exit
 fi
 
 MCBAND=(
@@ -82,19 +80,17 @@ round()
     eval "${1}=\$RESULT"
 }
 
-cL=0
-for MCB in "${MCBAND[@]}"
-do
-    comp CMP = "${POINT_Y/-/} >= $MCB"
+for (( cL=0 ; cL<${#MCBAND[@]} ; cL++ )) ; do
+    comp CMP = "${POINT_Y/-/} >= ${MCBAND[$cL]}"
     if [ $CMP -eq 1 ]; then
         MC2LL="MC2LL_$cL[@]"
         M=("${!MC2LL}")
 
         calc LNG = "${M[0]} + ${M[1]} * ${POINT_X/-/}"
         calc INT = "${POINT_Y/-/} / ${M[9]}"
-        calc LAT = "${M[2]} + ${M[3]} * ${INT} + ${M[4]} * ${INT} ^ 2 + \
-                    ${M[5]} * ${INT} ^ 3 + ${M[6]} * ${INT} ^ 4 + \
-                    ${M[7]} * ${INT} ^ 5 + ${M[8]} * ${INT} ^ 6"
+        calc LAT = "${M[2]} + ${M[3]} * ${INT} ^ 1 + ${M[4]} * ${INT} ^ 2 + \
+                              ${M[5]} * ${INT} ^ 3 + ${M[6]} * ${INT} ^ 4 + \
+                              ${M[7]} * ${INT} ^ 5 + ${M[8]} * ${INT} ^ 6"
 
         comp CMP = "${POINT_X} < 0"
         if [ $CMP -eq 1 ]; then
@@ -111,5 +107,4 @@ do
         echo "${LNG}, ${LAT}"
         break
     fi
-    (( cL = cL + 1 ))
 done
