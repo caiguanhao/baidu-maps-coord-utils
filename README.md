@@ -25,6 +25,10 @@ Points in multi-point GEO string share the same GEO type, which is determined by
 
     bash point2coord.sh 12958130.03, 4826652.51
 
+### Coordinates to point conversion
+
+    bash coord2point.sh 116.403596, 39.920041
+
 ## View / Use Baidu's JavaScript
 
 * Open [http://api.map.baidu.com/lbsapi/getpoint/](http://api.map.baidu.com/lbsapi/getpoint/) in Google Chrome.
