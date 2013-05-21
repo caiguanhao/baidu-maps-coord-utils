@@ -21,6 +21,13 @@ Returns the GEO string of the first search result for specified Chinese address 
     $ bash addr2geo.sh 广州塔
       .=UOqMLBsMwqPA;
 
+### Address to point
+
+Returns the point directly *and fuzzily*. Note that the script will sometimes return nothing if address is too short (for example, address without the name of the city). If the address is too long or does not exist, it will return a nearby point.
+
+    $ bash addr2point.sh 广州塔
+      12616023.37, 2628610.59
+
 ## GEO string to point
 
 The argument supports GEO string with only one point. For those strings with multiple points, you may either use Baidu's [JavaScript functions](http://api.map.baidu.com/getmodules?v=1.2&mod=scommon) to convert them or split the string by ';' and treat each part as an argument to this script.
