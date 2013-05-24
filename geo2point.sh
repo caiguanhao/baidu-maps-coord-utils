@@ -1,4 +1,6 @@
 #!/bin/bash
+# Baidu Maps Coordinates Utils
+# https://github.com/caiguanhao/baidu-maps-coord-utils
 
 set -e
 
@@ -119,3 +121,159 @@ while [[ $K -lt $LENGTH ]]; do
 done
 
 exit 1
+
+# Baidu's JavaScript:
+#
+# var aK = 0;
+# var bo = 1;
+# var aF = 2;
+# var at = ["=", ".", "-", "*"];
+# parseGeo = function (cF, cI) {
+#     if (typeof cF != "string" || !cF) {
+#         return
+#     }
+#     var cK = cF.split("|");
+#     var T;
+#     var cD;
+#     var cB;
+#     if (cK.length == 1) {
+#         T = Q(cF)
+#     } else {
+#         T = Q(cK[2]);
+#         cD = Q(cK[0]);
+#         cB = Q(cK[1])
+#     }
+#     var cG = {
+#         type: T.geoType
+#     };
+#     if (cI) {
+#         switch (cG.type) {
+#         case aF:
+#             var cH = new b3(T.geo[0][0], T.geo[0][1]);
+#             var cJ = a2.convertMC2LL(cH);
+#             cG.point = cJ;
+#             cG.points = [cJ];
+#             break;
+#         case bo:
+#             cG.points = [];
+#             var cL = T.geo[0];
+#             for (var cE = 0, cC = cL.length - 1; cE < cC; cE += 2) {
+#                 var cM = new b3(cL[cE], cL[cE + 1]);
+#                 cM = a2.convertMC2LL(cM);
+#                 cG.points.push(cM)
+#             }
+#             cD = new b3(cD.geo[0][0], cD.geo[0][1]);
+#             cB = new b3(cB.geo[0][0], cB.geo[0][1]);
+#             cD = a2.convertMC2LL(cD);
+#             cB = a2.convertMC2LL(cB);
+#             cG.bounds = new bE(cD, cB);
+#             break;
+#         default:
+#             break
+#         }
+#     }
+#     return cG
+# };
+# function Q(cI) {
+#     var cH = aj(cI.charAt(0));
+#     var cB = cI.substr(1);
+#     var cK = 0;
+#     var T = cB.length;
+#     var cL = [];
+#     var cF = [];
+#     var cG = [];
+#     while (cK < T) {
+#         if (cB.charAt(cK) == at[0]) {
+#             if ((T - cK) < 13) {
+#                 return 0
+#             }
+#             cG = cr(cB.substr(cK, 13), cL);
+#             if (cG < 0) {
+#                 return 0
+#             }
+#             cK += 13
+#         } else {
+#             if (cB.charAt(cK) == ";") {
+#                 cF.push(cL.slice(0));
+#                 cL.length = 0;
+#                 ++cK
+#             } else {
+#                 if ((T - cK) < 8) {
+#                     return 0
+#                 }
+#                 cG = aL(cB.substr(cK, 8), cL);
+#                 if (cG < 0) {
+#                     return 0
+#                 }
+#                 cK += 8
+#             }
+#         }
+#     }
+#     for (var cE = 0, cC = cF.length; cE < cC; cE++) {
+#         for (var cD = 0, cJ = cF[cE].length; cD < cJ; cD++) {
+#             cF[cE][cD] /= 100
+#         }
+#     }
+#     return {
+#         geoType: cH,
+#         geo: cF
+#     }
+# }
+# function aj(cB) {
+#     var T = -1;
+#     if (cB == at[1]) {
+#         T = aF
+#     } else {
+#         if (cB == at[2]) {
+#             T = bo
+#         } else {
+#             if (cB == at[3]) {
+#                 T = aK
+#             }
+#         }
+#     }
+#     return T
+# }
+# function cr(cD, cB) {
+#     var T = 0;
+#     var cF = 0;
+#     var cE = 0;
+#     for (var cC = 0; cC < 6; cC++) {
+#         cE = X(cD.substr(1 + cC, 1));
+#         if (cE < 0) {
+#             return -1 - cC
+#         }
+#         T += cE << (6 * cC);
+#         cE = X(cD.substr(7 + cC, 1));
+#         if (cE < 0) {
+#             return -7 - cC
+#         }
+#         cF += cE << (6 * cC)
+#     }
+#     cB.push(T);
+#     cB.push(cF);
+#     return 0
+# }
+# function X(cB) {
+#     var T = cB.charCodeAt(0);
+#     if (cB >= "A" && cB <= "Z") {
+#         return T - "A".charCodeAt(0)
+#     } else {
+#         if (cB >= "a" && cB <= "z") {
+#             return (26 + T - "a".charCodeAt(0))
+#         } else {
+#             if (cB >= "0" && cB <= "9") {
+#                 return (52 + T - "0".charCodeAt(0))
+#             } else {
+#                 if (cB == "+") {
+#                     return 62
+#                 } else {
+#                     if (cB == "/") {
+#                         return 63
+#                     }
+#                 }
+#             }
+#         }
+#     }
+#     return -1
+# }
