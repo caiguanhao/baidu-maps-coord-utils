@@ -19,18 +19,14 @@ SEARCH $ADDRESS
 
 if [[ $SEARCH_RESULT == *"content"* ]]; then
 
-	CONTENT_POS=${SEARCH_RESULT%%"content"*}
-	CONTENT_POS=$(( ${#CONTENT_POS} - 1 ))
+	CONTENT_POS=${SEARCH_RESULT%%\"content\"*}
+	CONTENT=${SEARCH_RESULT:${#CONTENT_POS}}
 
-	CONTENT=${SEARCH_RESULT:$CONTENT_POS}
+	X=${CONTENT%%\"x\"*}
+	X=$(echo ${CONTENT:${#X}} | sed 's/"x":"\([^"]*\)".*/\1/')
 
-	X=${CONTENT%%"x"*}
-	X=$(( ${#X} - 1 ))
-	X=$(echo ${CONTENT:$X} | sed 's/"x":"\([^"]*\)".*/\1/')
-
-	Y=${CONTENT%%"y"*}
-	Y=$(( ${#Y} - 1 ))
-	Y=$(echo ${CONTENT:$Y} | sed 's/"y":"\([^"]*\)".*/\1/')
+	Y=${CONTENT%%\"y\"*}
+	Y=$(echo ${CONTENT:${#Y}} | sed 's/"y":"\([^"]*\)".*/\1/')
 
 	echo $X, $Y
 

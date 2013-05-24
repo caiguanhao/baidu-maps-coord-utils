@@ -22,14 +22,10 @@ while [[ ! $SEARCH_RESULT == *"content"* ]] && [[ ${#ADDRESS} -gt 1 ]]; do
 	SEARCH $ADDRESS
 done
 
-CONTENT_POS=${SEARCH_RESULT%%"content"*}
-CONTENT_POS=$(( ${#CONTENT_POS} - 1 ))
+CONTENT_POS=${SEARCH_RESULT%%\"content\"*}
+CONTENT=${SEARCH_RESULT:${#CONTENT_POS}}
 
-CONTENT=${SEARCH_RESULT:$CONTENT_POS}
-
-FIRST_GEO_POS=${CONTENT%%"geo"*}
-FIRST_GEO_POS=$(( ${#FIRST_GEO_POS} - 1 ))
-
-FIRST_GEO=$(echo ${CONTENT:$FIRST_GEO_POS} | sed 's/"geo":"\([^"]*\)".*/\1/')
+FIRST_GEO_POS=${CONTENT%%\"geo\"*}
+FIRST_GEO=$(echo ${CONTENT:${#FIRST_GEO_POS}} | sed 's/"geo":"\([^"]*\)".*/\1/')
 
 echo $FIRST_GEO

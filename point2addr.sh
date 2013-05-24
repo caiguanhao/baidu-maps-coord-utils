@@ -26,15 +26,11 @@ if [[ ! $RESULT == *"content"* ]]; then
 	exit 1
 fi
 
-CONTENT_POS=${RESULT%%"content"*}
-CONTENT_POS=$(( ${#CONTENT_POS} - 1 ))
+CONTENT_POS=${RESULT%%\"content\"*}
+CONTENT=${RESULT:${#CONTENT_POS}}
 
-CONTENT=${RESULT:$CONTENT_POS}
-
-ADDRESS_POS=${CONTENT%%"address"*}
-ADDRESS_POS=$(( ${#ADDRESS_POS} - 1 ))
-
-ADDRESS=$(echo ${CONTENT:$ADDRESS_POS} | sed 's/"address":"\([^"]*\)".*/\1/')
+ADDRESS_POS=${CONTENT%%\"address\"*}
+ADDRESS=$(echo ${CONTENT:${#ADDRESS_POS}} | sed 's/"address":"\([^"]*\)".*/\1/')
 
 if [[ ${#ADDRESS} -eq 0 ]]; then
 	echo "Address not found."
