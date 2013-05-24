@@ -1,4 +1,6 @@
 #!/bin/bash
+# Baidu Maps Coordinates Utils
+# https://github.com/caiguanhao/baidu-maps-coord-utils
 
 set -e
 
