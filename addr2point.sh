@@ -17,7 +17,7 @@ SEARCH()
 
 SEARCH $ADDRESS
 
-if [[ $SEARCH_RESULT == *"content"* ]]; then
+if [[ $SEARCH_RESULT == *\"content\"* ]]; then
 
 	CONTENT_POS=${SEARCH_RESULT%%\"content\"*}
 	CONTENT=${SEARCH_RESULT:${#CONTENT_POS}}

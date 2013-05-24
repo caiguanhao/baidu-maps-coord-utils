@@ -21,7 +21,7 @@ RESULT=`$CURL -G -L -s "http://api.map.baidu.com/?qt=rgc"\
 				--data "x=${POINT_X}"\
 				--data "y=${POINT_Y}"`
 
-if [[ ! $RESULT == *"content"* ]]; then
+if [[ ! $RESULT == *\"content\"* ]]; then
 	echo "Address not found."
 	exit 1
 fi
