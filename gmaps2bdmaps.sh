@@ -1,4 +1,30 @@
 #!/bin/bash
+# Baidu Maps Coordinates Utils
+# https://github.com/caiguanhao/baidu-maps-coord-utils
+#
+# Baidu's JavaScript:
+#
+# var cb = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+# function db(a) {
+#     var b = "",
+#         c, d, e = "",
+#         g, j = "",
+#         k = 0;
+#     g = /[^A-Za-z0-9\+\/\=]/g;
+#     if (!a || g.exec(a)) return a;
+#     a = a.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+#     do {
+#         c = cb.indexOf(a.charAt(k++));
+#         d = cb.indexOf(a.charAt(k++));
+#         g = cb.indexOf(a.charAt(k++));
+#         j = cb.indexOf(a.charAt(k++));
+#         c = c << 2 | d >> 4, d = (d & 15) << 4 | g >> 2;
+#         e = (g & 3) << 6 | j, b += String.fromCharCode(c);
+#         64 != g && (b += String.fromCharCode(d));
+#         64 != j && (b += String.fromCharCode(e));
+#     } while (k < a.length);
+#     return b
+# }
 
 set -e
 
@@ -23,7 +49,7 @@ fi
 
 append_char_to()
 {
-    RESULT=$(printf "\x$(printf %x ${!3})")
+    RESULT=$(printf "\x$(printf %x ${!3})") # String.fromCharCode()
     eval "${1}=\"${!1}\${RESULT}\""
 }
 
