@@ -120,3 +120,42 @@ round LNG
 round LAT
 
 echo "${LNG}, ${LAT}"
+
+# Baidu's JavaScript: 
+#
+# convertLL2MC: function(T) {
+#     var cB, cD;
+#     T.lng = this.getLoop(T.lng, -180, 180);
+#     T.lat = this.getRange(T.lat, -74, 74);
+#     cB = new b3(T.lng, T.lat);
+#     for (var cC = 0; cC < this.LLBAND.length; cC++) {
+#         if (cB.lat >= this.LLBAND[cC]) {
+#             cD = this.LL2MC[cC];
+#             break
+#         }
+#     }
+#     if (!cD) {
+#         for (var cC = this.LLBAND.length - 1; cC >= 0; cC--) {
+#             if (cB.lat <= -this.LLBAND[cC]) {
+#                 cD = this.LL2MC[cC];
+#                 break
+#             }
+#         }
+#     }
+#     var cE = this.convertor(T, cD);
+#     var T = new b3(cE.lng.toFixed(2), cE.lat.toFixed(2));
+#     return T
+# }
+# convertor: function(cC, cD) {
+#     if (!cC || !cD) {
+#         return
+#     }
+#     var T = cD[0] + cD[1] * Math.abs(cC.lng);
+#     var cB = Math.abs(cC.lat) / cD[9];
+#     var cE = cD[2] + cD[3] * cB + cD[4] * cB * cB + 
+#     cD[5] * cB * cB * cB + cD[6] * cB * cB * cB * cB + 
+#     cD[7] * cB * cB * cB * cB * cB + cD[8] * cB * cB * cB * cB * cB * cB;
+#     T *= (cC.lng < 0 ? -1 : 1);
+#     cE *= (cC.lat < 0 ? -1 : 1);
+#     return new b3(T, cE)
+# }

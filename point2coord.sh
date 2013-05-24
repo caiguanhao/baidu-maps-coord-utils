@@ -110,3 +110,32 @@ for (( cL=0 ; cL<${#MCBAND[@]} ; cL++ )) ; do
         break
     fi
 done
+
+# Baidu's JavaScript:
+#
+# convertMC2LL: function(cB) {
+#     var cC, cE;
+#     cC = new b3(Math.abs(cB.lng), Math.abs(cB.lat));
+#     for (var cD = 0; cD < this.MCBAND.length; cD++) {
+#         if (cC.lat >= this.MCBAND[cD]) {
+#             cE = this.MC2LL[cD];
+#             break
+#         }
+#     }
+#     var T = this.convertor(cB, cE);
+#     var cB = new b3(T.lng.toFixed(6), T.lat.toFixed(6));
+#     return cB
+# }
+# convertor: function(cC, cD) {
+#     if (!cC || !cD) {
+#         return
+#     }
+#     var T = cD[0] + cD[1] * Math.abs(cC.lng);
+#     var cB = Math.abs(cC.lat) / cD[9];
+#     var cE = cD[2] + cD[3] * cB + cD[4] * cB * cB + 
+#     cD[5] * cB * cB * cB + cD[6] * cB * cB * cB * cB + 
+#     cD[7] * cB * cB * cB * cB * cB + cD[8] * cB * cB * cB * cB * cB * cB;
+#     T *= (cC.lng < 0 ? -1 : 1);
+#     cE *= (cC.lat < 0 ? -1 : 1);
+#     return new b3(T, cE)
+# }
