@@ -54,6 +54,11 @@ Find the possible address to the point.
     $ bash point2addr.sh 12616098.76, 2628657.08
       广东省广州市海珠区艺苑路
 
+## Google Maps coordinates to Baidu Maps coordinates
+
+    $ bash gmaps2bdmaps.sh 23.10641, 113.32449
+      113.3310312352, 23.112174790841
+
 ## View / Use Baidu's JavaScript
 
 * Open [http://api.map.baidu.com/lbsapi/getpoint/](http://api.map.baidu.com/lbsapi/getpoint/) in Google Chrome.
