@@ -17,7 +17,7 @@ SEARCH()
 
 SEARCH $ADDRESS
 
-while [[ ! $SEARCH_RESULT == *"content"* ]] && [[ ${#ADDRESS} -gt 1 ]]; do
+while [[ ! $SEARCH_RESULT == *\"content\"* ]] && [[ ${#ADDRESS} -gt 1 ]]; do
 	ADDRESS=${ADDRESS%?}
 	SEARCH $ADDRESS
 done
