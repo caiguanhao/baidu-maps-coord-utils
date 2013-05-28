@@ -1,5 +1,7 @@
 # Baidu Maps Coordinates Utils
 
+[![Build Status](https://travis-ci.org/caiguanhao/baidu-maps-coord-utils.png?branch=master)](https://travis-ci.org/caiguanhao/baidu-maps-coord-utils)
+
 Use these utils to automatically fetch coordinates of large quantities of addresses in China. These coordinates may be used as the default coordinates of the embeded Baidu Maps in web pages. Note that the way how Baidu Maps represent its coordinates is different from the rest of the world.
 
 ## One-line command

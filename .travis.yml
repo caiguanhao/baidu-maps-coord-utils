@@ -1,0 +1,11 @@
+language: bash
+install:
+  - sudo apt-get install bc
+script:
+  - bash addr2geo.sh 广州塔
+  - bash addr2point.sh 广州塔
+  - bash geo2point.sh ".=UOqMLBsMwqPA;"
+  - bash point2coord.sh 12616098.76, 2628657.08
+  - bash coord2point.sh 113.331110, 23.112097
+  - bash point2addr.sh 12616098.76, 2628657.08
+  - bash gmaps2bdmaps.sh 23.10641, 113.32449
