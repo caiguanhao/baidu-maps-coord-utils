@@ -2,7 +2,18 @@
 # Baidu Maps Coordinates Utils
 # https://github.com/caiguanhao/baidu-maps-coord-utils
 
+WGET=$(which wget)
 CURL=$(which curl)
+if [[ ${#WGET} -eq 0 ]]; then
+    if [[ ${#CURL} -eq 0 ]]; then
+        echo "Install wget or curl first."
+        exit 1
+    else
+        DOWNLOAD="$CURL -G -L -s"
+    fi
+else
+    DOWNLOAD="$WGET --quiet -O -"
+fi
 
 if [[ ${#@} -gt 0 ]]; then
     ADDRESS=$@
@@ -13,8 +24,9 @@ fi
 
 SEARCH()
 {
-    SEARCH_RESULT=`$CURL -G -L -s "http://api.map.baidu.com/?qt=s&rn=1"\
-                         --data-urlencode "wd=${@}"`
+    QUERY="$@"
+    QUERY=${QUERY// /+}
+    SEARCH_RESULT=`$DOWNLOAD "http://api.map.baidu.com/?qt=s&rn=1&wd=${QUERY}"`
 }
 
 SEARCH $ADDRESS
