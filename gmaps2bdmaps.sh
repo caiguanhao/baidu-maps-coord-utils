@@ -26,11 +26,20 @@
 #     return b
 # }
 
-set -e
-
 BC=$(which bc)
 
+WGET=$(which wget)
 CURL=$(which curl)
+if [[ ${#WGET} -eq 0 ]]; then
+    if [[ ${#CURL} -eq 0 ]]; then
+        echo "Install wget or curl first."
+        exit 1
+    else
+        DOWNLOAD="$CURL -G -L -s"
+    fi
+else
+    DOWNLOAD="$WGET --quiet -O -"
+fi
 
 CHAR="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 
@@ -84,8 +93,9 @@ decode()
     eval "${3}=\${B}"
 }
 
-QUERY=`$CURL -G -L -s "http://api.map.baidu.com/ag/coord/convert?from=2&to=4&"\
-                         --data "x=${COORD_Y}" --data "y=${COORD_X}"`
+CONVERT="http://api.map.baidu.com/ag/coord/convert"
+
+QUERY=`$DOWNLOAD "${CONVERT}?from=2&to=4&x=${COORD_Y}&y=${COORD_X}"`
 
 X=${QUERY%%\"x\"*}
 X=$(echo ${QUERY:${#X}} | sed 's/"x":"\([^"]*\)".*/\1/')
