@@ -13,15 +13,15 @@ fi
 
 SEARCH()
 {
-	SEARCH_RESULT=`$CURL -G -L -s "http://api.map.baidu.com/?qt=s&rn=1"\
-						 --data-urlencode "wd=${@}"`
+    SEARCH_RESULT=`$CURL -G -L -s "http://api.map.baidu.com/?qt=s&rn=1"\
+                         --data-urlencode "wd=${@}"`
 }
 
 SEARCH $ADDRESS
 
 while [[ ! $SEARCH_RESULT == *\"content\"* ]] && [[ ${#ADDRESS} -gt 1 ]]; do
-	ADDRESS=${ADDRESS%?}
-	SEARCH $ADDRESS
+    ADDRESS=${ADDRESS%?}
+    SEARCH $ADDRESS
 done
 
 CONTENT_POS=${SEARCH_RESULT%%\"content\"*}

@@ -20,12 +20,12 @@ else
 fi
 
 RESULT=`$CURL -G -L -s "http://api.map.baidu.com/?qt=rgc"\
-				--data "x=${POINT_X}"\
-				--data "y=${POINT_Y}"`
+                --data "x=${POINT_X}"\
+                --data "y=${POINT_Y}"`
 
 if [[ ! $RESULT == *\"content\"* ]]; then
-	echo "Address not found."
-	exit 1
+    echo "Address not found."
+    exit 1
 fi
 
 CONTENT_POS=${RESULT%%\"content\"*}
@@ -35,8 +35,8 @@ ADDRESS_POS=${CONTENT%%\"address\"*}
 ADDRESS=$(echo ${CONTENT:${#ADDRESS_POS}} | sed 's/"address":"\([^"]*\)".*/\1/')
 
 if [[ ${#ADDRESS} -eq 0 ]]; then
-	echo "Address not found."
-	exit 1
+    echo "Address not found."
+    exit 1
 else
-	echo $ADDRESS
+    echo $ADDRESS
 fi
