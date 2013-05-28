@@ -79,8 +79,8 @@ Find the possible address to the point.
 
 ## Requirements
 
-* cURL
-* bc
+* [GNU Wget](http://www.gnu.org/software/wget/) or [cURL](http://curl.haxx.se/)
+* [bc](http://www.gnu.org/software/bc/)
 
 ## Examples
 
