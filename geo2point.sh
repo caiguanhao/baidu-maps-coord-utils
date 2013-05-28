@@ -6,6 +6,8 @@ set -e
 
 BC=$(which bc)
 
+set -- ${1//\\\//\/} ${@:2}      # replace \/ to /
+
 if [[ ${#1} -eq 15 ]]; then
     GEO=$1
 else
