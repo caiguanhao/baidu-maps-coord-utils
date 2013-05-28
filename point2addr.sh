@@ -2,9 +2,18 @@
 # Baidu Maps Coordinates Utils
 # https://github.com/caiguanhao/baidu-maps-coord-utils
 
-set -e
-
+WGET=$(which wget)
 CURL=$(which curl)
+if [[ ${#WGET} -eq 0 ]]; then
+    if [[ ${#CURL} -eq 0 ]]; then
+        echo "Install wget or curl first."
+        exit 1
+    else
+        DOWNLOAD="$CURL -G -L -s"
+    fi
+else
+    DOWNLOAD="$WGET --quiet -O -"
+fi
 
 ARG_1=${1//,/}
 ARG_2=$2
@@ -19,9 +28,9 @@ else
     exit 1
 fi
 
-RESULT=`$CURL -G -L -s "http://api.map.baidu.com/?qt=rgc"\
-                --data "x=${POINT_X}"\
-                --data "y=${POINT_Y}"`
+API="http://api.map.baidu.com/"
+
+RESULT=`$DOWNLOAD "${API}?qt=rgc&x=${POINT_X}&y=${POINT_Y}"`
 
 if [[ ! $RESULT == *\"content\"* ]]; then
     echo "Address not found."
