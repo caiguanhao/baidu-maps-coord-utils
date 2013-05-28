@@ -2,9 +2,12 @@
 # Baidu Maps Coordinates Utils
 # https://github.com/caiguanhao/baidu-maps-coord-utils
 
-set -e
-
 BC=$(which bc)
+
+if [[ ${#BC} -eq 0 ]]; then
+    echo "Install bc first."
+    exit 1
+fi
 
 set -- ${1//\\\//\/} ${@:2}      # replace \/ to /
 
