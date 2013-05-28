@@ -16,9 +16,9 @@ else
 fi
 
 if [[ ${#@} -gt 0 ]]; then
-    ADDRESS=$@
+    ADDRESS=$(echo -e "$@")  # support hex code
 else
-    echo "Please provide one address (for example: \"天安门\")."
+    echo "Please provide one address (for example: \"广州塔\")."
     exit 1
 fi
 
