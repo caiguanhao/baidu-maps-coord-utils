@@ -78,9 +78,13 @@ Find the possible address to the point.
 
 * Back-and-forth conversion between point and coordinates is not always accurate.
 * Baidu Maps may change the coordinates to the address frequently.
+* Conversion from Google Maps coords to Baidu Maps' may not be accurate if the coords are outside of mainland China.
 
 ## Requirements
 
+Most of Linux/Unix based operating systems have these software pre-installed.
+
+* Bash
 * [GNU Wget](http://www.gnu.org/software/wget/) or [cURL](http://curl.haxx.se/)
 * [bc](http://www.gnu.org/software/bc/)
 
@@ -88,9 +92,14 @@ Find the possible address to the point.
 
 * [Bash script to auto convert more than 50 addresses to coordinates](https://github.com/qnn/qnn-agent-sites/blob/master/misc/update_coords.sh)
 
+## Run Tests
+
+You can run ``bash .tests.sh`` to see if this tool works.
+
 ## See Also
 
 * [Baidu Maps Download](https://github.com/caiguanhao/baidu-maps-download)
+* [Search Baidu Maps for coordinates](http://api.map.baidu.com/lbsapi/getpoint/)
 
 ## Developer
 
